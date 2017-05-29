@@ -7,13 +7,6 @@ New-Item "C:\SoftwaresDump\QTP12.5" -ItemType Directory -ErrorAction SilentlyCon
 # Download
 (New-Object System.Net.WebClient).DownloadFile("$SoftwareWebLink", "$SoftwarePath")
 
-#Extracting
-$shell = New-Object -ComObject shell.application
-$zip = $shell.NameSpace("$SOftwarePath")
-foreach ($item in $zip.items()) {
-  $shell.Namespace("$NewDIR").CopyHere($item)
-}
-
 (New-Object System.Net.WebClient).DownloadFile("http://artifacts.g7crm4l.org/softwares/QTP12.5/vs2015.exe", "C:\SoftwaresDump\QTP12.5\vs2015.exe")
 
 
