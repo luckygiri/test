@@ -1,52 +1,51 @@
-# Install
-###################################################################################################
-# PowerShell configurations
-# NOTE: Because the $ErrorActionPreference is "Stop", this script will stop on first failure.
-#      This is necessary to ensure we capture errors inside the try-catch-finally block.
-$ErrorActionPreference = "Stop"
-
-# Ensure we set the working directory to that of the script.
-pushd $PSScriptRoot
-###################################################################################################
-# Functions used in this script.
-function Handle-LastError
+Function Get-TempPassword()
 {
-   [CmdletBinding()]
-   param(
-   )
+    Param(
+        [int] $length=10,
+        [string[]] $sourcedata
+    )
 
-   $message = $error[0].Exception.Message
-   if ($message)
-   {
-       Write-Host -Object "ERROR: $message" -ForegroundColor Red
-   }
+    For ($loop=1; $loop –le $length; $loop++) 
+    {
+        $tempPassword+=($sourcedata | GET-RANDOM)
+    }
 
-   # IMPORTANT NOTE: Throwing a terminating error (using $ErrorActionPreference = "Stop") still
-   # returns exit code zero from the PowerShell script when using -File. The workaround is to
-   # NOT use -File when calling this script and leverage the try-catch-finally block and return
-   # a non-zero exit code from the catch block.
-
-   exit -1
-}
-###################################################################################################
-# Handle all errors in this script.
-trap
-{
-   # NOTE: This trap will handle all errors. There should be no need to use a catch below in this
-   #       script, unless you want to ignore a specific error.
-   Handle-LastError
-}
-###################################################################################################
-# Main execution block.
-
-try
-{
-     Start-Sleep -s "$Seconds"
-}
-finally
-{
-   popd
+    return $tempPassword
 }
 
-Start-Process C:\SoftwaresDump\QTP12.5\setup.exe -ArgumentList '/s'
-Start-Process C:\SoftwaresDump\QTP12.5\qtpsetup.exe -ArgumentList '/s'
+$ascii=$NULL;For ($a=33;$a –le 126;$a++) {$ascii+=,[char][byte]$a }
+
+$userName = "artifactInstaller"
+$password = Get-TempPassword –length 43 –sourcedata $ascii
+
+$cn = [ADSI]"WinNT://$env:ComputerName"
+
+# Create user
+$user = $cn.Create("User", $userName)
+$user.SetPassword($password)
+$user.SetInfo()
+$user.description = "DevTestLab artifact installer"
+$user.SetInfo()
+
+# Add user to the Administrators group
+$group = [ADSI]"WinNT://$env:ComputerName/Administrators,group"
+$group.add("WinNT://$env:ComputerName/$userName")
+
+$secPassword = ConvertTo-SecureString $password -AsPlainText -Force
+$credential = New-Object System.Management.Automation.PSCredential("$env:COMPUTERNAME\$($username)", $secPassword)
+
+$command = $PSScriptRoot + "\SetupLoadrunner.ps1"
+
+# Run Loadrunner install as the artifactInstaller user
+Enable-PSRemoting –Force -SkipNetworkProfileCheck
+
+# Ensure that current process can run scripts. 
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force 
+
+Invoke-Command -FilePath $command -Credential $credential -ComputerName $env:COMPUTERNAME
+
+# Delete the artifactInstaller user
+$cn.Delete("User", $userName)
+
+# Delete the artifactInstaller user profile
+gwmi win32_userprofile | where { $_.LocalPath -like "*$userName*" } | foreach { $_.Delete() }
