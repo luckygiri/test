@@ -1,20 +1,16 @@
 
 { "$schema": "https://raw.githubusercontent.com/Azure/azure-devtestlab/master/schemas/2016-11-28/dtlArtifacts.json",
-    "title": "psfile",
-    "publisher": "psfile",
-    "description": "Install psfile with default options",
+    "title": "Unified Functional Testing",
+    "publisher": "HP",
+    "description": "Install QTP with default options",
     "tags": [
         "Windows",
-        "psfile"
+        "Unified Functional Testing"
     ],
     "iconUri": "",
     "targetOsType": "Windows",
-    
-        "runCommand": {
-      "commandToExecute": "powershell.exe"
-      
-           
-            
+ 
+ "runCommand": {
+        "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass \"& ./startInstall.ps1 -PackageList ', 'Unified Functional Testing', '\"')]"
     }
 }
- 
