@@ -36,7 +36,7 @@ $credential = New-Object System.Management.Automation.PSCredential("$env:COMPUTE
 
 $command = $PSScriptRoot + "\setup.ps1"
 
-# Run Loadrunner install as the artifactInstaller user
+# Run  install as the artifactInstaller user
 Enable-PSRemoting –Force -SkipNetworkProfileCheck
 
 # Ensure that current process can run scripts. 
