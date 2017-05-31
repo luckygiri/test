@@ -1,1 +1,3 @@
-$command = $PSScriptRoot + "\Setup.ps1"
+Enable-PSRemoting –Force -SkipNetworkProfileCheck
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
+
