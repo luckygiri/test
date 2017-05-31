@@ -13,8 +13,8 @@
         "runCommand": {
       "commandToExecute": "powershell.exe"
       
-         "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass \"& ./setup.exe' -PackageList ', 'mongodb', '\"')]"
-"commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass \"& ./qtpsetup.exe' -PackageList ', 'mongodb', '\"')]"
+         "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass \"& ./setup.exe', '\"')]"
+"commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass \"& ./qtpsetup.exe', '\"')]"
 
              
             
