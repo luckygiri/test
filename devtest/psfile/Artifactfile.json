@@ -11,7 +11,7 @@
     "targetOsType": "Windows",
     
         "runCommand": {
-        "commandToExecute": "powershell.exe"
+      "commandToExecute": "powershell.exe -ExecutionPolicy bypass -File startInstall.ps1"
          
     }
 }
