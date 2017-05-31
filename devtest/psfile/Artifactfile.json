@@ -15,7 +15,10 @@
         "commandToExecute": "C:\SoftwaresDump\QTP12.5\setup.exe"
         "commandToExecute": "C:\SoftwaresDump\QTP12.5\qtpsetup.exe"
             
-            
+         "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass \"& ./Start-Process 'C:\SoftwaresDump\QTP12.5\setup.exe' -PackageList ', 'mongodb', '\"')]"
+"commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass \"& ./Start-Process 'C:\SoftwaresDump\QTP12.5\qtpsetup.exe' -PackageList ', 'mongodb', '\"')]"
+
+             
             
     }
 }
