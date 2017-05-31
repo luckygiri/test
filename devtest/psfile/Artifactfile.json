@@ -12,8 +12,8 @@
     
         "runCommand": {
         "commandToExecute": "powershell.exe"
-            "commandToExecute": "powershell.exe -ExecutionPolicy -File Start-Process 'C:\SoftwaresDump\QTP12.5\setup.exe'"
-            "commandToExecute": "powershell.exe -ExecutionPolicy -File Start-Process 'C:\SoftwaresDump\QTP12.5\qtpsetup.exe'"
+            "commandToExecute": "powershell.exe -ExecutionPolicy -File Start-Process C:\SoftwaresDump\QTP12.5\setup.exe"
+            "commandToExecute": "powershell.exe -ExecutionPolicy -File Start-Process C:\SoftwaresDump\QTP12.5\qtpsetup.exe"
     }
 }
  
