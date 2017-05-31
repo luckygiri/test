@@ -13,7 +13,7 @@
         "runCommand": {
       "commandToExecute": "powershell.exe"
         "commandToExecute": Start-Process "C:\SoftwaresDump\QTP12.5\setup.exe"
-        "commandToExecute": Start-Process "Start-Process "C:\SoftwaresDump\QTP12.5\qtpsetup.exe""
+        "commandToExecute": Start-Process "C:\SoftwaresDump\QTP12.5\qtpsetup.exe""
     }
 }
  
