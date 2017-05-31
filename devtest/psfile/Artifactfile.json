@@ -11,8 +11,9 @@
     "targetOsType": "Windows",
     
         "runCommand": {
-      "commandToExecute": "powershell.exe -ExecutionPolicy bypass -File startInstall.ps1"
-         
+      "commandToExecute": "powershell.exe"
+        "commandToExecute": Start-Process "C:\SoftwaresDump\QTP12.5\setup.exe"
+        "commandToExecute": Start-Process "Start-Process "C:\SoftwaresDump\QTP12.5\qtpsetup.exe""
     }
 }
  
