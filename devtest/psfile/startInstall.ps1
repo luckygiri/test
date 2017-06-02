@@ -35,7 +35,7 @@ $group.add("WinNT://$env:ComputerName/$userName")
 $secPassword = ConvertTo-SecureString $password -AsPlainText -Force
 $credential = New-Object System.Management.Automation.PSCredential("$env:COMPUTERNAME\$($username)", $secPassword)
 
-$command = $PSScriptRoot + "\setup.ps1"
+$command = $PSScriptRoot + ".\setup.ps1"
 
 # Run install as the artifactInstaller user
 Enable-PSRemoting –Force -SkipNetworkProfileCheck
