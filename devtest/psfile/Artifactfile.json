@@ -9,8 +9,9 @@
     ],
     "iconUri": "",
     "targetOsType": "Windows",
- 
- "runCommand": {
-        "commandToExecute": "[concat('powershell.exe -ExecutionPolicy bypass \"& ./setup.ps1 -PackageList ', 'Unified Functional Testing', '\"')]"
-    }
+
+   "runCommand": {
+        "commandToExecute": "powershell.exe -ExecutionPolicy -File setup.ps1"
+
+ }
 }
