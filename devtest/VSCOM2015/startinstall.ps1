@@ -66,11 +66,12 @@ try
 
     Write-Output 'Downloading pre-requisite files ...'
     (New-Object System.Net.WebClient).DownloadFile("$SoftwareWebLink", "$SoftwarePath")
-    (New-Object System.Net.WebClient).DownloadFile("http://artifacts.g7crm4l.org/softwares/QTP12.5/vs2015.exe", "C:\SoftwaresDump\QTP12.5\vs2015.exe")
+   
 
-    Write-Output 'Installing ...'
-    Start-Process "C:\SoftwaresDump\QTP12.5\vs_community.exe"
-    Start-Process "C:\SoftwaresDump\QTP12.5\vs2015.exe"  
+ Write-Output 'Installing ...'
+Start-Process "C:\SoftwaresDump\QTP12.5\vs_community.exe" -ArgumentList '/q' -Wait 
+
+    
 
     Write-Output 'Done!'
 }
